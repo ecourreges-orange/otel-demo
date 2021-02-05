@@ -13,8 +13,8 @@ JAVA_OPTS="${JAVA_OPTS} \
   -Dapplication.name=${APP_NAME} \
   -Dapplication.home=${APP_HOME} \
   -Dotel.exporter=jaeger \
-  -Dotel.jaeger.endpoint=jaeger:14250 \
-  -Dotel.jaeger.service.name=otel-ui \
+  -Dotel.exporter.jaeger.endpoint=jaeger:14250 \
+  -Dotel.exporter.jaeger.service.name=otel-ui \
   -javaagent:${APP_HOME}/opentelemetry-javaagent-all.jar"
 
 exec java ${JAVA_OPTS} \

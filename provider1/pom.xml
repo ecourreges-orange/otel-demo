@@ -29,6 +29,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-rest</artifactId>
         </dependency>
+	<!-- Sends trace data to zipkin over http 
+	     (defaults to http://localhost:9411/api/v2/spans) -->
+	<dependency>
+	  <groupId>org.springframework.cloud</groupId>
+	  <artifactId>spring-cloud-starter-zipkin</artifactId>
+	  <version>2.2.3.RELEASE</version>
+	</dependency>
     </dependencies>
 
     <build>

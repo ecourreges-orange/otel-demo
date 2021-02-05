@@ -11,6 +11,7 @@ RUN mkdir -p ${APP_HOME}
 COPY ./target/${APP_NAME}-*.jar ${APP_HOME}/${APP_NAME}.jar
 COPY ./tmp/opentelemetry-javaagent-all.jar ${APP_HOME}/
 COPY ./scripts/start-app.sh ${APP_HOME}/
+COPY ./config/application.properties ${APP_HOME}/config/application.properties
 
 WORKDIR ${APP_HOME}
 

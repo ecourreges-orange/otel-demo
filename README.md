@@ -46,3 +46,16 @@ $ docker-compose up
 - Jaeger UI: http://localhost:16686
 
 To try it out, just hit the sample app UI a few times, and then look at the traces in Jaeger.
+
+## OpenTelemetry vs spring sleuth bench
+
+This version has the UI and jaeger disabled to save RAM and avoid swapping
+
+Choose to activate OTEL or SLEUTH in docker-compose.yml  
+`docker-compose up`
+
+In another terminal launch the test, it lasts 1 minute:  
+`jmeter -n -t perftest.jmx`
+
+Get requests per minute and avg rtt in ms:  
+`wc -l out.jtl &&awk -F, '{ total += $2; count++ } END { print total/count }' out.jtl`

@@ -13,10 +13,22 @@ JAVA_OPTS="${JAVA_OPTS} \
   -Dapplication.name=${APP_NAME} \
   -Dapplication.home=${APP_HOME} \
   -Dotel.exporter=jaeger \
-  -Dotel.jaeger.endpoint=jaeger:14250 \
-  -Dotel.jaeger.service.name=otel-provider2 \
-  -javaagent:${APP_HOME}/opentelemetry-javaagent-all.jar"
+  -Dotel.exporter.jaeger.endpoint=${JAEGER_HOST}:14250 \
+  -Dotel.exporter.jaeger.service.name=${APP_NAME} \
+  -Dotel.config.sampler.probability=${SAMPLING_PROBABILITY} "
 
-exec java ${JAVA_OPTS} \
+
+if [ "$SLEUTH" = "yes" ]; then
+   CONF_LOC=/config/application.yml,${APP_HOME}/config/application.properties 
+else
+   CONF_LOC=/config/application.yml
+fi
+
+if [ "$OTEL" = "yes" ]; then
+    JAVA_OPTS="${JAVA_OPTS} -javaagent:${APP_HOME}/opentelemetry-javaagent-all.jar -Dspring.sleuth.enabled=false"
+fi
+
+exec java  ${JAVA_OPTS} \
   -jar "${APP_HOME}/${APP_NAME}.jar" \
-  --spring.config.location=/config/application.yml
+  --spring.config.location=${CONF_LOC}
+

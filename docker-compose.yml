@@ -46,6 +46,11 @@ services:
 
   otel-provider1:
     image: "otel-provider1:latest"
+    environment:
+      OTEL: "no"
+      SLEUTH: "yes"
+      SAMPLING_PROBABILITY: "1.0"
+      JAEGER_HOST: "jaeger.k8s.pns.hbx.geo.francetelecom.fr"
     ports:
       - "8082:8080"
     volumes:
@@ -53,6 +58,11 @@ services:
 
   otel-provider2:
     image: "otel-provider2:latest"
+    environment:
+      OTEL: "no"
+      SLEUTH: "yes"
+      SAMPLING_PROBABILITY: "1.0"
+      JAEGER_HOST: "jaeger.k8s.pns.hbx.geo.francetelecom.fr"
     ports:
       - "8083:8080"
     volumes:
@@ -60,20 +70,25 @@ services:
 
   otel-api:
     image: "otel-api:latest"
+    environment:
+      OTEL: "no"
+      SLEUTH: "yes"
+      SAMPLING_PROBABILITY: "1.0"
+      JAEGER_HOST: "jaeger.k8s.pns.hbx.geo.francetelecom.fr"
     ports:
       - "8081:8080"
     volumes:
       - "./api/config/application.yml:/config/application.yml"
 
-  otel-ui:
-    image: "otel-ui:latest"
-    ports:
-      - "8080:8080"
-    volumes:
-      - "./ui/config/application.yml:/config/application.yml"
+#  otel-ui:
+#    image: "otel-ui:latest"
+#    ports:
+#      - "8080:8080"
+#    volumes:
+#      - "./ui/config/application.yml:/config/application.yml"
 
   # https://www.jaegertracing.io/docs/1.18/getting-started/
-  jaeger:
-    image: "jaegertracing/all-in-one:latest"
-    ports:
-      - "16686:16686"
+#  jaeger:
+#    image: "jaegertracing/all-in-one:latest"
+#    ports:
+#      - "16686:16686"
